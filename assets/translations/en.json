@@ -1,0 +1,10 @@
+{
+  "no_internet": "No internet connection",
+  "no_data": "No data available",
+  "no_auth": "Authentication required",
+  "forbidden": "Access forbidden",
+  "validation": "Validation error",
+  "server": "Server error",
+  "unknown": "Unknown error",
+  "canceled": "Request canceled"
+}
