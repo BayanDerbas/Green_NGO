@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MoneyBox extends StatelessWidget {
   final String title;
@@ -32,7 +33,7 @@ class MoneyBox extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: GoogleFonts.notoSansArabic(
               fontSize: 12,
               color: titleColor,
             ),
@@ -40,11 +41,11 @@ class MoneyBox extends StatelessWidget {
           const Gap(4),
           Text(
             "\$${value.toStringAsFixed(0)}",
-            style: TextStyle(
+            style: GoogleFonts.notoSansArabic(
               fontWeight: FontWeight.bold,
               color: valueColor,
             ),
-          )
+          ),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FieldLabel extends StatelessWidget {
   final String text;
@@ -9,7 +10,9 @@ class FieldLabel extends StatelessWidget {
     return Text(
       text,
       textAlign: TextAlign.right,
-      style: const TextStyle(fontWeight: FontWeight.w600),
+      style: GoogleFonts.notoSansArabic(
+        fontWeight: FontWeight.w600,
+      ),
     );
   }
 }

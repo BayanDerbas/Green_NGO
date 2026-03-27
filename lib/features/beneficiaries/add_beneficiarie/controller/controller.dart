@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:green_org/core/style/repo.dart';
 import '../../../../../core/config/app_builder.dart';
 import '../../../../../core/services/rest_api/rest_api.dart';
+import '../../../../core/style/repo.dart';
 import '../models/beneficiary_model.dart';
 
 class AddBeneficiarieController extends GetxController {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:green_org/core/style/repo.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
@@ -21,7 +22,7 @@ class CustomOutlinedButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: const TextStyle(
+        style: GoogleFonts.notoSansArabic(
           fontSize: 16,
           color: StyleRepo.glowGreen,
           fontWeight: FontWeight.w600,

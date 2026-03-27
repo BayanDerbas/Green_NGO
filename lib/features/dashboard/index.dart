@@ -47,12 +47,12 @@ class DashboardPage extends StatelessWidget {
                   DashboardCard(
                     title: "البرامج",
                     total: "6",
-                    numColor: StyleRepo.green,
+                    numColor: StyleRepo.glownAmber,
                     active: "4",
                     inactive: "2",
                     icon: Icons.menu_book,
-                    iconColor: StyleRepo.green,
-                    bgColor: StyleRepo.lightGreen,
+                    iconColor: StyleRepo.glownAmber,
+                    bgColor: StyleRepo.lightGlownAmber,
                   ),
 
                   DashboardCard(

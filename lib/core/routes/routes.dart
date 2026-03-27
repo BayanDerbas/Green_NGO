@@ -3,10 +3,12 @@ import 'package:green_org/features/beneficiaries/add_beneficiarie/index.dart';
 import 'package:green_org/features/dashboard/index.dart';
 import 'package:green_org/features/login/binding/binding.dart';
 import 'package:green_org/features/login/index.dart';
+import 'package:green_org/features/users/all_users/index.dart';
 import '../../features/beneficiaries/monitoring_beneficiaries/all_beneficiaries/binding/binding.dart';
 import '../../features/beneficiaries/monitoring_beneficiaries/all_beneficiaries/index.dart';
 import '../../features/beneficiaries/monitoring_beneficiaries/beneficiary/controller/controller.dart';
 import '../../features/beneficiaries/monitoring_beneficiaries/beneficiary/index.dart';
+import '../../features/users/all_users/binding/binding.dart';
 import '../config/app_builder.dart';
 
 abstract class AppRouting {
@@ -22,6 +24,7 @@ abstract class AppRouting {
     Pages.monitoringBeneficiary.page,
     Pages.addBeneficiaries.page,
     Pages.allBeneficiaries.page,
+    Pages.allUsers.page,
   ];
 }
 
@@ -30,7 +33,8 @@ enum Pages {
   dashboard,
   monitoringBeneficiary,
   addBeneficiaries,
-  allBeneficiaries;
+  allBeneficiaries,
+  allUsers;
 
   String get route => "/$name";
 
@@ -64,6 +68,8 @@ enum Pages {
           page: () => AllBeneficiariesPage(),
           binding: AllBeneficiariesBinding(),
         );
+      case Pages.allUsers:
+      return GetPage(name: route, page:() => AllUsersPage(),binding: AllUsersBinding());  
     }
   }
 }

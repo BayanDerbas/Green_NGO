@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:green_org/core/style/repo.dart';
-
 class DashboardCard extends StatelessWidget {
   final String title;
   final String total;
@@ -56,8 +56,8 @@ class DashboardCard extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: StyleRepo.deepGrey,
+            style: GoogleFonts.notoSansArabic(
+              color: StyleRepo.black,
               fontSize: 15,
               fontWeight: FontWeight.w500,
             ),
@@ -66,10 +66,17 @@ class DashboardCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("إجمالي "),
+              Text(
+                "إجمالي ",
+                style: GoogleFonts.notoSansArabic(
+                  color: StyleRepo.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
               Text(
                 total,
-                style: TextStyle(
+                style: GoogleFonts.notoSansArabic(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: numColor,
@@ -85,19 +92,37 @@ class DashboardCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Text("نشط "),
+                  Text(
+                    "نشط ",
+                    style: GoogleFonts.notoSansArabic(
+                      color: StyleRepo.black,
+                      fontSize: 14,
+                    ),
+                  ),
                   Text(
                     active,
-                    style: const TextStyle(color: StyleRepo.green),
+                    style: GoogleFonts.notoSansArabic(
+                      color: StyleRepo.green,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
               Row(
                 children: [
-                  Text("$unActive "),
+                  Text(
+                    "$unActive ",
+                    style: GoogleFonts.notoSansArabic(
+                      color: StyleRepo.black,
+                      fontSize: 14,
+                    ),
+                  ),
                   Text(
                     inactive,
-                    style: const TextStyle(color: StyleRepo.red),
+                    style: GoogleFonts.notoSansArabic(
+                      color: StyleRepo.red,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),

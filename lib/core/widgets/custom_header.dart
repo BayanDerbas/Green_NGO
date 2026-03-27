@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:green_org/core/style/repo.dart';
 
 class CustomHeader extends StatelessWidget {
@@ -19,24 +20,30 @@ class CustomHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: StyleRepo.glowGreen,
         borderRadius: BorderRadius.circular(40),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
         children: [
           Builder(
             builder: (context) => IconButton(
               icon: const Icon(Icons.menu, color: Colors.white),
-              onPressed: onMenuPressed ??
-                  () => Scaffold.of(context).openDrawer(),
+              onPressed: onMenuPressed ?? () => Scaffold.of(context).openDrawer(),
             ),
           ),
           Expanded(
             child: Center(
               child: Text(
                 title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                style: GoogleFonts.notoSansArabic(
+                  color: StyleRepo.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),

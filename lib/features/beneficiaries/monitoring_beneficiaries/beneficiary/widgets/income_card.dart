@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_org/core/style/repo.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class IncomeCard extends StatelessWidget {
   final String title;
@@ -30,18 +31,37 @@ class IncomeCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(title, style: const TextStyle(color: StyleRepo.deepGrey)),
+          Text(
+            title,
+            style: GoogleFonts.notoSansArabic(
+              color: StyleRepo.deepGrey,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+
           const SizedBox(height: 6),
+
           isEditing
               ? TextField(
                   controller: TextEditingController(text: value),
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   onChanged: onChanged,
+                  style: GoogleFonts.notoSansArabic(
+                    fontSize: 16,
+                  ),
+                  decoration: const InputDecoration(
+                    isDense: true,
+                    border: OutlineInputBorder(),
+                  ),
                 )
               : Text(
                   "$value ل.س",
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.notoSansArabic(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
         ],
       ),

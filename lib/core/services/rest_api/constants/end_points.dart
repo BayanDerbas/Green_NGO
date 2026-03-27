@@ -13,4 +13,6 @@ abstract class EndPoints {
       "/auth/beneficiaries/$beneficiaryId";
   //SECTION - Update Beneficiary
   static String update_beneficiary(int id) => "/auth/beneficiaries/$id";
+  //SECTION - AllUsers
+  static String all_users(int page) => "/auth/users?page=$page";
 }

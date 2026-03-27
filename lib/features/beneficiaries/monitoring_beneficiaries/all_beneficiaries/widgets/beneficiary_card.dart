@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:green_org/core/style/repo.dart';
 import 'package:green_org/features/beneficiaries/monitoring_beneficiaries/all_beneficiaries/widgets/badge_item.dart';
 import 'package:green_org/features/beneficiaries/monitoring_beneficiaries/all_beneficiaries/widgets/money_box.dart';
@@ -42,10 +43,7 @@ class BeneficiaryCard extends StatelessWidget {
         color: StyleRepo.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(.05),
-            blurRadius: 10,
-          )
+          BoxShadow(color: Colors.black.withOpacity(.05), blurRadius: 10),
         ],
       ),
       child: Column(
@@ -53,9 +51,7 @@ class BeneficiaryCard extends StatelessWidget {
           Container(
             height: 5,
             decoration: const BoxDecoration(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             ),
           ),
 
@@ -63,7 +59,6 @@ class BeneficiaryCard extends StatelessWidget {
             padding: const EdgeInsets.all(18),
             child: Column(
               children: [
-
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -73,13 +68,17 @@ class BeneficiaryCard extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: StyleRepo.lightGreen,
+                        color: status == "نشط"
+                            ? StyleRepo.lightGreen
+                            : StyleRepo.lightPink,  
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
                         status,
-                        style: const TextStyle(
-                          color: StyleRepo.glowGreen,
+                        style: GoogleFonts.notoSansArabic(
+                          color: status == "نشط"
+                              ? StyleRepo.glowGreen
+                              : StyleRepo.red, 
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -93,7 +92,7 @@ class BeneficiaryCard extends StatelessWidget {
                         children: [
                           Text(
                             name,
-                            style: const TextStyle(
+                            style: GoogleFonts.notoSansArabic(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -101,7 +100,7 @@ class BeneficiaryCard extends StatelessWidget {
                           const Gap(3),
                           Text(
                             gender,
-                            style: const TextStyle(
+                            style: GoogleFonts.notoSansArabic(
                               color: StyleRepo.deepGrey,
                               fontSize: 13,
                             ),
@@ -122,10 +121,10 @@ class BeneficiaryCard extends StatelessWidget {
                       child: Center(
                         child: Text(
                           name[0],
-                          style: const TextStyle(
+                          style: GoogleFonts.notoSansArabic(
                             color: StyleRepo.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontSize: 18,
                           ),
                         ),
                       ),
@@ -161,9 +160,9 @@ class BeneficiaryCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Text(
+                      Text(
                         "الحالة الوظيفية",
-                        style: TextStyle(
+                        style: GoogleFonts.notoSansArabic(
                           fontSize: 15,
                           color: StyleRepo.glowGreen,
                           fontWeight: FontWeight.bold,
@@ -172,7 +171,7 @@ class BeneficiaryCard extends StatelessWidget {
                       const Gap(4),
                       Text(
                         job_status,
-                        style: const TextStyle(
+                        style: GoogleFonts.notoSansArabic(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: StyleRepo.deepGrey,
@@ -188,21 +187,27 @@ class BeneficiaryCard extends StatelessWidget {
                     ElevatedButton(
                       onPressed: onTap,
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(StyleRepo.glowGreen),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
+                        backgroundColor: MaterialStateProperty.all(
+                          StyleRepo.glowGreen,
                         ),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                            ),
                       ),
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.arrow_back_ios_new,
-                              size: 14, color: StyleRepo.white),
-                          Gap(6),
+                          const Icon(
+                            Icons.arrow_back_ios_new,
+                            size: 14,
+                            color: StyleRepo.white,
+                          ),
+                          const Gap(6),
                           Text(
                             "متابعة",
-                            style: TextStyle(
+                            style: GoogleFonts.notoSansArabic(
                               fontWeight: FontWeight.bold,
                               color: StyleRepo.white,
                             ),
@@ -219,13 +224,13 @@ class BeneficiaryCard extends StatelessWidget {
                         vertical: 12,
                       ),
                       decoration: BoxDecoration(
-                        color: StyleRepo.softOrange,
+                        color: StyleRepo.lightGlownAmber,
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: Text(
                         improvement,
-                        style: const TextStyle(
-                          color: StyleRepo.deepOrange,
+                        style: GoogleFonts.notoSansArabic(
+                          color: StyleRepo.amber,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -251,10 +256,10 @@ class BeneficiaryCard extends StatelessWidget {
                       valueColor: StyleRepo.blue,
                     ),
                   ],
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

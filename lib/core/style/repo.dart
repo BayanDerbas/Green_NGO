@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 abstract class StyleRepo {
   static const Color mintGreen = Color(0xFF4fffb0);
   static const Color black = Colors.black;
+  static const Color darkEmerald = Color(0xFF032F20);
   static const Color white = Colors.white;
   static const Color grey = Colors.grey;
   static const Color deepGrey = Color(0xFF7B7986);
@@ -34,7 +35,11 @@ abstract class StyleRepo {
   static const Color forestGreen = Color(0xFF2E704F);
   static const Color deepForest = Color(0xFF285B41);
   static const Color badgeGreen = Color(0xFF245C43);
-  static const Color glowGreen = Color(0xFF3BA975);
+  static const Color glowGreen = Color(0xFF0e7b52);
+
+  static const Color glownAmber = Color(0xffFAB505);
+  static const Color amber = Color.fromARGB(255, 233, 176, 6);
+  static const Color lightGlownAmber = Color(0xFFFFF3C4);
 
   static const Color translucentWhite = Color(0x19FFFFFF);
   static const Color translucentBorder = Color(0x33FFFFFF);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:green_org/core/style/repo.dart';
 
 class FollowupCard extends StatelessWidget {
@@ -29,16 +30,17 @@ class FollowupCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final statusColor = isSuccess ? StyleRepo.glowGreen : Colors.red;
     final statusText = isSuccess ? "تحسن مستدام" : "لم يتحسن";
-    final statusIcon = isSuccess ? Icons.check_circle_outline : Icons.cancel_outlined;
+    final statusIcon =
+        isSuccess ? Icons.check_circle_outline : Icons.cancel_outlined;
 
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: StyleRepo.lightGrey),
       ),
-      child: IntrinsicHeight( 
+      child: IntrinsicHeight(
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch, 
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               width: 4,
@@ -58,9 +60,9 @@ class FollowupCard extends StatelessWidget {
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "ملاحظات",
-                            style: TextStyle(
+                            style: GoogleFonts.notoSansArabic(
                               color: StyleRepo.deepGrey,
                               fontSize: 16,
                             ),
@@ -69,6 +71,12 @@ class FollowupCard extends StatelessWidget {
                           TextField(
                             controller: notes,
                             maxLines: 3,
+                            style: GoogleFonts.notoSansArabic(),
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
                           ),
                         ],
                       )
@@ -82,43 +90,73 @@ class FollowupCard extends StatelessWidget {
                                 children: [
                                   Icon(statusIcon, color: statusColor),
                                   const Gap(4),
-                                  Text(statusText, style: TextStyle(color: statusColor)),
+                                  Text(
+                                    statusText,
+                                    style: GoogleFonts.notoSansArabic(
+                                      color: statusColor,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
                           ),
+
                           const Gap(8),
-                          Text(date),
+
+                          Text(
+                            date,
+                            style: GoogleFonts.notoSansArabic(),
+                          ),
+
                           const Gap(8),
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
+                                  Text(
                                     "الدخل عند المتابعة",
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style: GoogleFonts.notoSansArabic(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  Text(income),
+                                  Text(
+                                    income,
+                                    style: GoogleFonts.notoSansArabic(),
+                                  ),
                                 ],
                               ),
+
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text("الحالة الوظيفية"),
-                                  Text(jobStatus),
+                                  Text(
+                                    "الحالة الوظيفية",
+                                    style: GoogleFonts.notoSansArabic(),
+                                  ),
+                                  Text(
+                                    jobStatus,
+                                    style: GoogleFonts.notoSansArabic(),
+                                  ),
                                 ],
                               ),
                             ],
                           ),
+
                           const Gap(8),
+
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 "ملاحظات",
-                                style: TextStyle(color: StyleRepo.deepGrey, fontSize: 14),
+                                style: GoogleFonts.notoSansArabic(
+                                  color: StyleRepo.deepGrey,
+                                  fontSize: 14,
+                                ),
                               ),
                               const Gap(4),
                               Container(
@@ -128,7 +166,10 @@ class FollowupCard extends StatelessWidget {
                                   color: Colors.grey[200],
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Text(notesText),
+                                child: Text(
+                                  notesText,
+                                  style: GoogleFonts.notoSansArabic(),
+                                ),
                               ),
                             ],
                           ),

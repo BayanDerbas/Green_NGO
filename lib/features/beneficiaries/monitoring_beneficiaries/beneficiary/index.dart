@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:green_org/core/services/pagination/widgets/loading.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'controller/controller.dart';
 import 'widgets/beneficiary_tabs.dart';
 import 'widgets/income_card.dart';
@@ -28,9 +29,13 @@ class MonitoringBeneficiariePage extends StatelessWidget {
         backgroundColor: StyleRepo.white,
         iconTheme: const IconThemeData(color: StyleRepo.black),
         centerTitle: true,
-        title: const Text(
+        title: Text(
           "متابعة المستفيد",
-          style: TextStyle(color: StyleRepo.black, fontWeight: FontWeight.bold),
+          style: GoogleFonts.notoSansArabic(
+            color: StyleRepo.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 20
+          ),
         ),
       ),
       body: Obx(() {
@@ -51,14 +56,12 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                     children: [
                       Text(
                         b.user.fullName,
-                        style: const TextStyle(
-                          fontSize: 20,
+                        style: GoogleFonts.notoSansArabic(
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-
                       const Gap(6),
-
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
@@ -70,17 +73,14 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                         ),
                         child: Text(
                           b.user.status == "active" ? "نشط" : "غير نشط",
-                          style: TextStyle(
+                          style: GoogleFonts.notoSansArabic(
                             color: StyleRepo.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 15,
+                            fontSize: 14,
                           ),
                         ),
                       ),
-
                       const Gap(6),
-
-                      // المنطقة + العنوان
                       Obx(
                         () => controller.isEditing.value
                             ? Column(
@@ -88,34 +88,39 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                                   TextField(
                                     controller: controller.regoin
                                       ..text = b.region,
-                                    decoration: const InputDecoration(
-                                      label: Text("المنطقة"),
+                                    decoration: InputDecoration(
+                                      label: Text(
+                                        "المنطقة",
+                                        style: GoogleFonts.notoSansArabic(),
+                                      ),
                                     ),
+                                    style: GoogleFonts.notoSansArabic(),
                                   ),
                                   const Gap(8),
                                   TextField(
                                     controller: controller.address
                                       ..text = b.address,
-                                    decoration: const InputDecoration(
-                                      label: Text("العنوان"),
+                                    decoration: InputDecoration(
+                                      label: Text(
+                                        "العنوان",
+                                        style: GoogleFonts.notoSansArabic(),
+                                      ),
                                     ),
+                                    style: GoogleFonts.notoSansArabic(),
                                   ),
                                 ],
                               )
                             : Text(
                                 "${b.region} - ${b.address}",
-                                style: TextStyle(color: StyleRepo.deepGrey),
+                                style: GoogleFonts.notoSansArabic(
+                                  color: StyleRepo.deepGrey,
+                                ),
                               ),
                       ),
                     ],
                   ),
                 ),
-
                 const Gap(25),
-
-                // ================================
-                // VIEW / EDIT TABS
-                // ================================
                 Obx(
                   () => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,18 +138,12 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 const Gap(20),
-
-                // ================================
-                // PERSONAL DETAILS
-                // ================================
                 const SectionTitle(
                   title: "التفاصيل الشخصية",
                   icon: Icons.person_outline,
                 ),
                 const Gap(10),
-
                 Container(
                   padding: const EdgeInsets.all(18),
                   decoration: BoxDecoration(
@@ -175,7 +174,6 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         Row(
                           children: [
                             Expanded(
@@ -198,7 +196,6 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         Row(
                           children: [
                             Expanded(
@@ -221,7 +218,6 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         Row(
                           children: [
                             Expanded(
@@ -244,7 +240,6 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         InfoField(
                           label: "البريد الإلكتروني",
                           value: b.user.email,
@@ -255,18 +250,12 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 const Gap(25),
-
-                // ================================
-                // INCOME INFO
-                // ================================
                 const SectionTitle(
                   title: "الوضع الاقتصادي",
                   icon: Icons.payments_outlined,
                 ),
                 const Gap(12),
-
                 Obx(
                   () => Row(
                     children: [
@@ -294,18 +283,12 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 const Gap(30),
-
-                // ================================
-                // FOLLOW-UP
-                // ================================
                 const SectionTitle(
                   title: "آخر مدخلات سجل المتابعة",
                   icon: Icons.fact_check,
                 ),
                 const Gap(12),
-
                 Obx(
                   () => FollowupCard(
                     isEditing: controller.isEditing.value,
@@ -330,9 +313,12 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                       ),
                     ),
                     onPressed: () => controller.updateBeneficiaryDetails(),
-                    child: const Text(
+                    child: Text(
                       "حفظ التعديلات",
-                      style: TextStyle(color: StyleRepo.white, fontSize: 16),
+                      style: GoogleFonts.notoSansArabic(
+                        color: StyleRepo.white,
+                        fontSize: 16,
+                      ),
                     ),
                   );
                 }),

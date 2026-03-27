@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_org/core/style/repo.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InfoField extends StatelessWidget {
   final String label;
@@ -22,16 +23,31 @@ class InfoField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: const TextStyle(color: StyleRepo.deepGrey, fontSize: 14)),
+          Text(
+            label,
+            style: GoogleFonts.notoSansArabic(
+              color: StyleRepo.deepGrey,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+
           const SizedBox(height: 4),
+
           isEditing
               ? TextField(
                   controller: TextEditingController(text: value),
                   onChanged: onChanged,
+                  style: GoogleFonts.notoSansArabic(
+                    fontSize: 15,
+                  ),
                 )
               : Text(
                   value,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
+                  style: GoogleFonts.notoSansArabic(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
         ],
       ),

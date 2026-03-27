@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:green_org/core/style/repo.dart';
 
 class BeneficiaryTabItem extends StatelessWidget {
@@ -23,8 +24,9 @@ class BeneficiaryTabItem extends StatelessWidget {
 
           Text(
             title,
-            style: TextStyle(
+            style: GoogleFonts.notoSansArabic(
               fontWeight: FontWeight.w600,
+              fontSize: 16,
               color: isActive ? StyleRepo.black : StyleRepo.deepGrey,
             ),
           ),

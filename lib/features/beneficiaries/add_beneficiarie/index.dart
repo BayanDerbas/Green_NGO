@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:green_org/core/style/repo.dart';
 import 'package:green_org/core/widgets/custom_drawer.dart';
 import 'package:green_org/core/widgets/custom_dropdown.dart';
@@ -31,16 +32,19 @@ class AddBeneficiarie extends StatelessWidget {
               const Gap(10),
               const CustomHeader(title: "إضافة مستفيد"),
               const Gap(20),
-              const Text(
+              Text(
                 "إضافة مستفيد جديد",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: GoogleFonts.notoSansArabic(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const Gap(5),
-              const Text(
+              Text(
                 "المعلومات الأساسية",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                style: GoogleFonts.notoSansArabic(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                   color: StyleRepo.glowGreen,
                 ),
               ),
@@ -116,21 +120,6 @@ class AddBeneficiarie extends StatelessWidget {
                             ],
                           ),
                         ),
-                        // const Gap(20),
-                        // Expanded(
-                        //   child: Column(
-                        //     crossAxisAlignment: CrossAxisAlignment.end,
-                        //     children: [
-                        //       const FieldLabel("رقم الهاتف"),
-                        //       const Gap(6),
-                        //       CustomTextField(
-                        //         controller: controller.phoneController,
-                        //         hint: "0999999999 مثال",
-                        //         keyboardType: TextInputType.phone,
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
                       ],
                     ),
                     const Gap(20),
@@ -181,7 +170,6 @@ class AddBeneficiarie extends StatelessWidget {
                       ],
                     ),
                     const Gap(30),
-
                     const SectionTitle("الحالة"),
                     const Gap(10),
                     Row(
@@ -259,14 +247,24 @@ class AddBeneficiarie extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Gap(30),
-                    const SectionTitle("الرقم الوطني"),
+                    const Gap(16),
+                    Text(
+                      "الرقم الوطني",
+                      style: GoogleFonts.notoSansArabic(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                     const Gap(10),
                     CustomTextField(controller: controller.nationalController),
                     const Gap(35),
-                    CustomElevatedButton(
-                      text: "حفظ المستفيد",
-                      onPressed: controller.saveBeneficiary,
+                    SizedBox(
+                      width: 150,
+                      height: 60,
+                      child: CustomElevatedButton(
+                        text: "حفظ المستفيد",
+                        onPressed: controller.saveBeneficiary,
+                      ),
                     ),
                   ],
                 ),

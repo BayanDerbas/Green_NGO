@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:green_org/core/assets/assets.gen.dart';
 import '../../../core/style/repo.dart';
 
 class LoginLogo extends StatelessWidget {
@@ -7,23 +8,27 @@ class LoginLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(22),
+      width: 110,
+      height: 110,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: StyleRepo.badgeGreen,
-        border: Border.all(color: StyleRepo.glowGreen, width: 3),
+        border: Border.all(color: StyleRepo.white, width: 5),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x803BA975),
+            color: StyleRepo.forestGreen,
             blurRadius: 18,
             offset: Offset(0, 10),
           ),
         ],
       ),
-      child: const Icon(
-        Icons.park_rounded,
-        size: 55,
-        color: Colors.white,
+      child: ClipOval(
+        child: Image.asset(
+          Assets.images.logoLight.path,
+          width: 105,
+          height: 105,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
