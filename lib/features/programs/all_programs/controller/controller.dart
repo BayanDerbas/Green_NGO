@@ -75,4 +75,24 @@ class AllProgramsController extends GetxController {
   ProgramModel fromJson(Map<String, dynamic> json) {
     return ProgramModel.fromJson(json);
   }
+
+  Future<List<ProgramModel>> getLastThreePrograms() async {
+  try {
+    final response = await getPrograms(1, CancelToken());
+
+    if (response.data is List) {
+      final list = response.data as List;
+
+      return list
+          .map((e) => ProgramModel.fromJson(e))
+          .take(3)
+          .toList();
+    }
+
+    return [];
+  } catch (e) {
+    final cached = app.getCachedPrograms();
+    return cached.take(3).toList();
+  }
+}
 }

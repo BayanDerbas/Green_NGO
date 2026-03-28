@@ -8,13 +8,56 @@ import 'package:green_org/core/widgets/custom_drawer.dart';
 import 'package:green_org/core/widgets/custom_header.dart';
 import 'package:green_org/features/dashboard/widgets/dashboard_card.dart';
 import '../beneficiaries/monitoring_beneficiaries/all_beneficiaries/controller/controller.dart';
+import '../programs/all_programs/controller/controller.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
+  String getStatusText(String status) {
+    switch (status.toLowerCase()) {
+      case "draft":
+        return "مسودة";
+      case "active":
+        return "نشط";
+      case "approved":
+        return "مقبول";
+      case "cancelled":
+        return "ملغي";
+      case "suspended":
+        return "معلق";
+      case "expired":
+        return "منتهي";
+      default:
+        return status;
+    }
+  }
+
+  Color getStatusColor(String status) {
+    switch (status.toLowerCase()) {
+      case "draft":
+        return StyleRepo.amber;
+      case "active":
+        return StyleRepo.green;
+      case "approved":
+        return StyleRepo.blue;
+      case "cancelled":
+        return StyleRepo.red;
+      case "suspended":
+        return StyleRepo.purple;
+      case "expired":
+        return StyleRepo.deepGrey;
+      default:
+        return StyleRepo.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final beneficiariesController = Get.put(AllBeneficiariesController());
+    final programsController = Get.put(
+      AllProgramsController(),
+      tag: AllProgramsController.tag,
+    );
     return Scaffold(
       backgroundColor: StyleRepo.white,
       drawer: const CustomDrawer(),
@@ -124,8 +167,10 @@ class DashboardPage extends StatelessWidget {
                         leading: b.createdAt,
                         title: b.user!.fullName,
                         subtitle: b.maritalStatus,
-                        onTap: () =>
-                            Get.toNamed(Pages.monitoringBeneficiary.route,arguments: b.id),
+                        onTap: () => Get.toNamed(
+                          Pages.monitoringBeneficiary.route,
+                          arguments: b.id,
+                        ),
                       );
                     }).toList(),
                   );
@@ -134,33 +179,34 @@ class DashboardPage extends StatelessWidget {
 
               const Gap(20),
 
-              CustomCard(
-                title: "آخر البرامج النشطة",
-                items: [
-                  CustomCardItem(
-                    leading: "50,000 \$",
-                    title: "التمكين الاقتصادي للمرأة",
-                    subtitle: "45 مستفيد",
-                    leadingColor: StyleRepo.glowGreen,
-                    onTap: () => Get.toNamed(Pages.monitoringBeneficiary.route),
-                  ),
-                  CustomCardItem(
-                    leading: "35,000 \$",
-                    title: "دعم الشباب",
-                    subtitle: "32 مستفيد",
-                    leadingColor: StyleRepo.glowGreen,
-                    onTap: () => Get.toNamed(Pages.addBeneficiaries.route),
-                  ),
-                  CustomCardItem(
-                    leading: "28,000 \$",
-                    title: "التدريب المهني",
-                    subtitle: "21 مستفيد",
-                    leadingColor: StyleRepo.glowGreen,
-                    onTap: () => Get.toNamed(Pages.monitoringBeneficiary.route),
-                  ),
-                ],
+              FutureBuilder(
+                future: programsController.getLastThreePrograms(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Text("لا يوجد برامج");
+                  }
+
+                  final programs = snapshot.data!;
+
+                  return CustomCard(
+                    title: "آخر البرامج",
+                    items: programs.map((p) {
+                      return CustomCardItem(
+                        leading: getStatusText(p.status ?? ""),
+                        leadingColor: getStatusColor(p.status ?? ""),
+                        title: p.name ?? "",
+                        subtitle: p.location ?? "", 
+                        onTap: () =>
+                            Get.toNamed(Pages.monitoringBeneficiary.route),
+                      );
+                    }).toList(),
+                  );
+                },
               ),
-              const Gap(30),
             ],
           ),
         ),

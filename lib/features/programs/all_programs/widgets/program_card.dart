@@ -47,6 +47,10 @@ class ProgramCard extends StatelessWidget {
         return "مقبول";
       case "cancelled":
         return "ملغي";
+      case "suspended":
+        return "موقوف";
+      case "expired":
+        return "منتهي";
       default:
         return status;
     }
@@ -59,9 +63,13 @@ class ProgramCard extends StatelessWidget {
       case "active":
         return StyleRepo.green;
       case "approved":
-        return StyleRepo.blue;
+        return StyleRepo.purple;
       case "cancelled":
         return StyleRepo.red;
+      case "suspended":
+        return StyleRepo.deepGrey;
+      case "expired":
+        return StyleRepo.deepOrange;
       default:
         return StyleRepo.grey;
     }
@@ -74,9 +82,13 @@ class ProgramCard extends StatelessWidget {
       case "active":
         return StyleRepo.lightGreen;
       case "approved":
-        return StyleRepo.lightBlue;
+        return StyleRepo.lightPurple;
       case "cancelled":
         return StyleRepo.lightPink;
+      case "suspended":
+        return StyleRepo.lightGrey;
+      case "expired":
+        return StyleRepo.softOrange;
       default:
         return StyleRepo.lightGrey;
     }
