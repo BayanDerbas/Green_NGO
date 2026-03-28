@@ -34,7 +34,7 @@ class MonitoringBeneficiariePage extends StatelessWidget {
           style: GoogleFonts.notoSansArabic(
             color: StyleRepo.black,
             fontWeight: FontWeight.bold,
-            fontSize: 20
+            fontSize: 20,
           ),
         ),
       ),
@@ -80,46 +80,10 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const Gap(6),
-                      Obx(
-                        () => controller.isEditing.value
-                            ? Column(
-                                children: [
-                                  TextField(
-                                    controller: controller.regoin
-                                      ..text = b.region,
-                                    decoration: InputDecoration(
-                                      label: Text(
-                                        "المنطقة",
-                                        style: GoogleFonts.notoSansArabic(),
-                                      ),
-                                    ),
-                                    style: GoogleFonts.notoSansArabic(),
-                                  ),
-                                  const Gap(8),
-                                  TextField(
-                                    controller: controller.address
-                                      ..text = b.address,
-                                    decoration: InputDecoration(
-                                      label: Text(
-                                        "العنوان",
-                                        style: GoogleFonts.notoSansArabic(),
-                                      ),
-                                    ),
-                                    style: GoogleFonts.notoSansArabic(),
-                                  ),
-                                ],
-                              )
-                            : Text(
-                                "${b.region} - ${b.address}",
-                                style: GoogleFonts.notoSansArabic(
-                                  color: StyleRepo.deepGrey,
-                                ),
-                              ),
-                      ),
                     ],
                   ),
                 ),
+
                 const Gap(25),
                 Obx(
                   () => Row(
@@ -139,11 +103,13 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                   ),
                 ),
                 const Gap(20),
+
                 const SectionTitle(
                   title: "التفاصيل الشخصية",
                   icon: Icons.person_outline,
                 ),
                 const Gap(10),
+
                 Container(
                   padding: const EdgeInsets.all(18),
                   decoration: BoxDecoration(
@@ -243,19 +209,62 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                         InfoField(
                           label: "البريد الإلكتروني",
                           value: b.user.email,
-                          isEditing: controller.isEditing.value,
-                          onChanged: (v) => controller.email.text = v,
+                          isEditing: false,
                         ),
+                                                Obx(() {
+                          if (!controller.isEditing.value) {
+                            return Column(
+                              children: [
+                                Text(
+                                  "العنوان",
+                                  style: GoogleFonts.notoSansArabic(
+                                    color: StyleRepo.deepGrey,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                Text(
+                                  "${b.region} - ${b.address}",
+                                  style: GoogleFonts.notoSansArabic(
+                                    color: StyleRepo.black,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            );
+                          }
+
+                          return Column(
+                            children: [
+                              InfoField(
+                                label: "المنطقة",
+                                value: b.region,
+                                isEditing: true,
+                                onChanged: (v) => controller.regoin.text = v,
+                              ),
+                              InfoField(
+                                label: "العنوان",
+                                value: b.address,
+                                isEditing: true,
+                                onChanged: (v) => controller.address.text = v,
+                              ),
+                              const Gap(10),
+                            ],
+                          );
+                        }),
+                        const Gap(10),
                       ],
                     ),
                   ),
                 ),
+
                 const Gap(25),
+
                 const SectionTitle(
                   title: "الوضع الاقتصادي",
                   icon: Icons.payments_outlined,
                 ),
                 const Gap(12),
+
                 Obx(
                   () => Row(
                     children: [
@@ -283,12 +292,15 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                     ],
                   ),
                 ),
+
                 const Gap(30),
+
                 const SectionTitle(
                   title: "آخر مدخلات سجل المتابعة",
                   icon: Icons.fact_check,
                 ),
                 const Gap(12),
+
                 Obx(
                   () => FollowupCard(
                     isEditing: controller.isEditing.value,
@@ -301,6 +313,7 @@ class MonitoringBeneficiariePage extends StatelessWidget {
                         b.employmentStatus.trim().toLowerCase() == "employed",
                   ),
                 ),
+
                 const Gap(10),
                 Obx(() {
                   if (!controller.isEditing.value) return SizedBox();

@@ -115,7 +115,7 @@ String params = Uri(queryParameters: {
 }).query;
 
 final response = await APIService.instance.request(Request(
-  endPoint: "${EndPoints.update_beneficiary(beneficiaryId)}?$params",
+  endPoint: "${EndPoints.update_beneficiary(beneficiary.value!.id)}?$params",
   method: RequestMethod.post,
   header: {
     "Authorization": "Bearer $token",

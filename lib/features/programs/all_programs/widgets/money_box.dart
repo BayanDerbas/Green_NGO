@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomBox extends StatelessWidget {
+class MoneyBox extends StatelessWidget {
   final String title;
-  final String value;
+  final double value;
   final Color cardColor;
   final Color titleColor;
   final Color valueColor;
 
-  const CustomBox({
+  const MoneyBox({
     super.key,
     required this.title,
     required this.value,
@@ -34,16 +34,15 @@ class CustomBox extends StatelessWidget {
           Text(
             title,
             style: GoogleFonts.notoSansArabic(
-              fontSize: 14,
+              fontSize: 12,
               color: titleColor,
-              fontWeight: FontWeight.bold
             ),
           ),
           const Gap(4),
           Text(
-            "${value}",
+            "\$${value.toStringAsFixed(0)}",
             style: GoogleFonts.notoSansArabic(
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.bold,
               color: valueColor,
             ),
           ),

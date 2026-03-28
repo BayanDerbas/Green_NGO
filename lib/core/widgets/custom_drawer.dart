@@ -81,13 +81,6 @@ class CustomDrawer extends StatelessWidget {
           ),
           const Gap(10),
           MenuRow(
-            title: "المستخدمون",
-            icon: Icons.people,
-            isActive: false,
-            route: Pages.allUsers.route,
-          ),
-          const Gap(10),
-          MenuRow(
             title: "متابعة المستفيدين",
             icon: Icons.monitor_heart_outlined,
             isActive: currentRoute == Pages.allBeneficiaries.route,
@@ -112,7 +105,7 @@ class CustomDrawer extends StatelessWidget {
             title: "البرامج",
             icon: Icons.menu_book_outlined,
             isActive: false,
-            route: Pages.dashboard.route,
+            route: Pages.allPrograms.route,
           ),
           const Spacer(),
           InkWell(
