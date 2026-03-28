@@ -79,6 +79,13 @@ class CustomDrawer extends StatelessWidget {
             isActive: currentRoute == Pages.dashboard.route,
             route: Pages.dashboard.route,
           ),
+          // const Gap(10),
+          // MenuRow(
+          //   title: "المستخدمون",
+          //   icon: Icons.people,
+          //   isActive: currentRoute == Pages.allUsers.route,
+          //   route: Pages.allUsers.route,
+          // ),
           const Gap(10),
           MenuRow(
             title: "متابعة المستفيدين",
@@ -90,7 +97,7 @@ class CustomDrawer extends StatelessWidget {
           MenuRow(
             title: "إضافة مستفيد",
             icon: Icons.person_add_alt_1,
-            isActive: currentRoute == Pages.addBeneficiaries.route,
+            isActive: currentRoute == Pages.allUsers.route,
             route: Pages.addBeneficiaries.route,
           ),
           const Gap(10),
@@ -98,15 +105,23 @@ class CustomDrawer extends StatelessWidget {
             title: "المشاريع",
             icon: Icons.track_changes_outlined,
             isActive: false,
-            route: Pages.allBeneficiaries.route,
+            route: Pages.allProjects.route,
           ),
           const Gap(10),
           MenuRow(
             title: "البرامج",
             icon: Icons.menu_book_outlined,
-            isActive: false,
+            isActive: currentRoute == Pages.allPrograms.route,
             route: Pages.allPrograms.route,
           ),
+          // const Gap(10),
+          // MenuRow(
+          //   title: "إضافة برنامج",
+          //   icon: Icons.library_books_sharp,
+          //   isActive: currentRoute == Pages.addProgram.route,
+          //   route: Pages.addProgram.route,
+          // ),
+
           const Spacer(),
           InkWell(
             borderRadius: BorderRadius.circular(12),
@@ -130,7 +145,11 @@ class CustomDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.logout_sharp, color: StyleRepo.black, size: 24),
+                  const Icon(
+                    Icons.logout_sharp,
+                    color: StyleRepo.black,
+                    size: 24,
+                  ),
                   const Gap(12),
                   Text(
                     "تسجيل الخروج",

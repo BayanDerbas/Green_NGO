@@ -7,33 +7,19 @@ import 'money_box.dart';
 
 class ProgramCard extends StatelessWidget {
   final String name;
-  final String description;
   final String type;
-  final int targetAgeMin;
-  final int targetAgeMax;
-  final String targetGender;
-  final String location;
   final double totalBudgetUsd;
   final double spentBudgetUsd;
   final String status;
-  final String startDate;
-  final String endDate;
   final VoidCallback? onTap;
 
   const ProgramCard({
     super.key,
     required this.name,
-    required this.description,
     required this.type,
-    required this.targetAgeMin,
-    required this.targetAgeMax,
-    required this.targetGender,
-    required this.location,
     required this.totalBudgetUsd,
     required this.spentBudgetUsd,
     required this.status,
-    required this.startDate,
-    required this.endDate,
     this.onTap,
   });
 
@@ -149,39 +135,10 @@ class ProgramCard extends StatelessWidget {
             "$type :نوع البرنامج",
             style: GoogleFonts.notoSansArabic(color: StyleRepo.deepGrey),
           ),
-
-          const Gap(6),
-          Text(
-            textAlign: TextAlign.end,
-            "الوصف: $description",
-            style: GoogleFonts.notoSansArabic(color: StyleRepo.deepGrey),
-          ),
-
-          const Gap(10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "العمر المستهدف: $targetAgeMin - $targetAgeMax",
-                style: GoogleFonts.notoSansArabic(color: StyleRepo.black),
-              ),
-              Text(
-                "$targetGender : الجنس المستهدف",
-                style: GoogleFonts.notoSansArabic(color: StyleRepo.black),
-              ),
-            ],
-          ),
-
-          const Gap(10),
-          Text(
-            "الموقع: $location",
-            style: GoogleFonts.notoSansArabic(color: StyleRepo.black),
-          ),
-
-          const Gap(12),
+          const Gap(20),
 
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               MoneyBox(
                 title: "الميزانية الكلية",
@@ -200,17 +157,6 @@ class ProgramCard extends StatelessWidget {
               ),
             ],
           ),
-
-          const Gap(12),
-          Text(
-            "تاريخ البدء: $startDate",
-            style: GoogleFonts.notoSansArabic(color: StyleRepo.deepGrey),
-          ),
-          Text(
-            "تاريخ الانتهاء: $endDate",
-            style: GoogleFonts.notoSansArabic(color: StyleRepo.deepGrey),
-          ),
-
           const Gap(16),
           ElevatedButton(
             onPressed: onTap,

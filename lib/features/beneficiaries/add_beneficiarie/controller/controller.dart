@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../core/config/app_builder.dart';
 import '../../../../../core/services/rest_api/rest_api.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/style/repo.dart';
 import '../models/beneficiary_model.dart';
 
@@ -11,7 +12,6 @@ class AddBeneficiarieController extends GetxController {
   final api = APIService.instance;
   final app = Get.find<AppBuilder>();
 
-  final nameController= TextEditingController();
   final birthDateController = TextEditingController();
   final addressController = TextEditingController();
   final familyCountController = TextEditingController();
@@ -27,14 +27,27 @@ class AddBeneficiarieController extends GetxController {
 
   final genders = ["male", "female"];
   final regions = [
-    "دمشق","حلب","حمص","اللاذقية","السويداء",
-    "دير الزور","الرقة","ريف دمشق","ريف حلب","ريف حمص"
+    "دمشق",
+    "حلب",
+    "حمص",
+    "اللاذقية",
+    "السويداء",
+    "دير الزور",
+    "الرقة",
+    "ريف دمشق",
+    "ريف حلب",
+    "ريف حمص",
   ];
 
   final socialStatuses = ["single", "married", "divorced", "widowed"];
 
   final educationLevels = [
-    "illiterate","primary","secondary","highschool","university","higher"
+    "illiterate",
+    "primary",
+    "secondary",
+    "highschool",
+    "university",
+    "higher",
   ];
 
   var loading = false.obs;
@@ -56,70 +69,74 @@ class AddBeneficiarieController extends GetxController {
     );
 
     if (date != null) {
-      birthDateController.text =
-          "${date.year}-${date.month}-${date.day}";
+      birthDateController.text = "${date.year}-${date.month}-${date.day}";
     }
   }
 
- Future<void> saveBeneficiary() async {
-  if (!formKey.currentState!.validate()) return;
+  Future<void> saveBeneficiary() async {
+    if (!formKey.currentState!.validate()) return;
 
-  final id = int.tryParse(nameController.text);
+    if (beneficiaryId == 0) {
+      Get.snackbar("خطأ", "لا يمكن إضافة مستفيد بدون اختيار مستخدم");
+      return;
+    }
 
-  if (id == null) {
-    Get.snackbar("خطأ", "الرجاء إدخال ID صحيح");
-    return;
+    if (gender.value == null ||
+        region.value == null ||
+        socialStatus.value == null ||
+        education.value == null) {
+      Get.snackbar("خطأ", "يرجى تعبئة جميع الحقول");
+      return;
+    }
+
+    loading.value = true;
+
+    final request = AddBeneficiaryRequest(
+      gender: gender.value!,
+      dateOfBirth: birthDateController.text,
+      nationalId: nationalController.text,
+      age: int.tryParse(ageController.text) ?? 0,
+      region: region.value!,
+      address: addressController.text,
+      maritalStatus: socialStatus.value!,
+      familySize: int.tryParse(familyCountController.text) ?? 0,
+      educationLevel: education.value!,
+      incomeBefore: double.tryParse(incomeController.text) ?? 0,
+      incomeAfter: double.tryParse(incomeAfterController.text) ?? 0,
+      employmentStatus: "employed",
+    );
+
+    final response = await api.request(
+      Request(
+        endPoint: EndPoints.update_beneficiary(beneficiaryId),
+        method: RequestMethod.post,
+        header: {
+          "Authorization": "Bearer ${app.token}",
+          "Accept": "application/json",
+        },
+        body: request.toJson(),
+        fromJson: (json) => json,
+      ),
+    );
+
+    loading.value = false;
+
+    if (!response.success) {
+      Get.snackbar("خطأ", response.message);
+      return;
+    }
+
+    Get.snackbar(
+      "نجاح",
+      "تم تسجيل البيانات بنجاح",
+      colorText: StyleRepo.glowGreen,
+    );
+    Future.delayed(const Duration(milliseconds: 800), () {
+      Get.offAllNamed(Pages.dashboard.route);
+    });
+
+    clearTextFieldsOnly();
   }
-
-  if (gender.value == null ||
-      region.value == null ||
-      socialStatus.value == null ||
-      education.value == null) {
-    Get.snackbar("خطأ", "يرجى تعبئة جميع الحقول");
-    return;
-  }
-
-  loading.value = true;
-
-  final request = AddBeneficiaryRequest(
-    gender: gender.value!,
-    dateOfBirth: birthDateController.text,
-    nationalId: nationalController.text,
-    age: int.tryParse(ageController.text) ?? 0,
-    region: region.value!,
-    address: addressController.text,
-    maritalStatus: socialStatus.value!,
-    familySize: int.tryParse(familyCountController.text) ?? 0,
-    educationLevel: education.value!,
-    incomeBefore: double.tryParse(incomeController.text) ?? 0,
-    incomeAfter: double.tryParse(incomeAfterController.text) ?? 0,
-    employmentStatus: "employed",
-  );
-
-  final response = await api.request(
-    Request(
-      endPoint: EndPoints.update_beneficiary(id),
-      method: RequestMethod.post,
-      header: {
-        "Authorization": "Bearer ${app.token}",
-        "Accept": "application/json",
-      },
-      body: request.toJson(),
-      fromJson: (json) => json,
-    ),
-  );
-
-  loading.value = false;
-
-  if (!response.success) {
-    Get.snackbar("خطأ", response.message);
-    return;
-  }
-
-  Get.snackbar("نجاح", "تم تسجيل البيانات بنجاح",colorText: StyleRepo.glowGreen);
-
-  clearTextFieldsOnly();
-}
 
   void clearTextFieldsOnly() {
     birthDateController.clear();

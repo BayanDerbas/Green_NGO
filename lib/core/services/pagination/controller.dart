@@ -72,10 +72,20 @@ class PaginationController<T> extends GetxController {
           return response;
         }
       } else {
-        data.data = [
-          ...(data.data ?? []),
-          ...(response.data as List).map((element) => fromJson(element)),
-        ];
+        // data.data = [
+        //   ...(data.data ?? []),
+        //   ...(response.data as List).map((element) => fromJson(element)),
+        // ];
+        final list = response.data;
+
+        if (list is! List) {
+          log("❌ API returned non-list data: $list", name: "Pager");
+          isFinished = true;
+          loading = false;
+          return response;
+        }
+
+        data.data = [...(data.data ?? []), ...list.map((e) => fromJson(e))];
         currentPage++;
         while (!scrollController.hasClients) {
           await 100.milliseconds.delay();

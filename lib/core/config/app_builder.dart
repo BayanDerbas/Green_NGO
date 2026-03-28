@@ -1,15 +1,21 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:green_org/features/login/model/login_model.dart';
+import 'package:green_org/features/projects/all_projects/model/project_model.dart';
 import '../../features/beneficiaries/monitoring_beneficiaries/beneficiary/model/beneficiary_details.dart';
 import '../../features/programs/all_programs/model/program_models.dart';
+import '../../features/programs/program/model/program_details_model.dart';
+import '../../features/projects/project/model/program_details_model.dart';
+import '../../features/users/all_users/model/user_model.dart';
 
 const kStorageApp = "app";
 const kUserKey = "user";
 const kTokenKey = "token";
 const kBeneficiariesKey = "beneficiaries";
 const kBeneficiaryDetailsKey = "beneficiary_details";
+const kUsersKey = "users";
 const kProgramsKey = "programs";
+const kProjectsKey = "projects";
 
 class AppBuilder extends GetxService {
   late final GetStorage _box;
@@ -54,6 +60,17 @@ class AppBuilder extends GetxService {
     return null;
   }
 
+  Future<void> saveUsers(List<UserModel> users) async {
+    await _box.write(kUsersKey, users.map((e) => e.toJson()).toList());
+  }
+
+  List<UserModel> getCachedUsers() {
+    final data = _box.read(kUsersKey) ?? [];
+    return List<UserModel>.from(
+      data.map((e) => UserModel.fromJson(Map<String, dynamic>.from(e))),
+    );
+  }
+
   Future<void> savePrograms(List<ProgramModel> programs) async {
     await _box.write(kProgramsKey, programs.map((e) => e.toJson()).toList());
   }
@@ -63,6 +80,44 @@ class AppBuilder extends GetxService {
     return List<Map<String, dynamic>>.from(
       data,
     ).map((e) => ProgramModel.fromJson(e)).toList();
+  }
+
+  Future<void> saveProgramDetails(ProgramDetailsModel program) async {
+    await _box.write("program_${program.id}", program.toJson());
+  }
+
+  ProgramDetailsModel? getProgramDetails(int id) {
+    final json = _box.read("program_$id");
+    if (json != null) {
+      return ProgramDetailsModel.fromJson(Map<String, dynamic>.from(json));
+    }
+    return null;
+  }
+
+  Future<void> saveProjects(List<ProjectModel> projects) async {
+    await _box.write(kProjectsKey, projects.map((e) => e.toJson()).toList());
+  }
+
+  List<ProjectModel> getCachedProjects() {
+    final data = _box.read(kProjectsKey) ?? [];
+
+    return List<Map<String, dynamic>>.from(
+      data,
+    ).map((e) => ProjectModel.fromJson(e)).toList();
+  }
+
+  Future<void> saveProjectDetails(ProjectDetailsModel project) async {
+    await _box.write("project_${project.id}", project.toJson());
+  }
+
+  ProjectDetailsModel? getProjectDetails(int id) {
+    final json = _box.read("project_$id");
+
+    if (json != null) {
+      return ProjectDetailsModel.fromJson(Map<String, dynamic>.from(json));
+    }
+
+    return null;
   }
 
   Future<void> logout() async {

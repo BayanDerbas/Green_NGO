@@ -34,19 +34,24 @@ class AllProgramsPage extends StatelessWidget {
                 fromJson: controller.fromJson,
                 itemBuilder: (_, index, b) {
                   return ProgramCard(
-                    onTap: ()=> Get.toNamed(Pages.monitoringBeneficiary.route),
+                    onTap: () {
+                      if (b.id != null) {
+                        Get.toNamed(
+                          Pages.monitoringProgram.route,
+                          arguments: b.id,
+                        );
+                      } else {
+                        Get.snackbar(
+                          "خطأ",
+                          "لا يمكن فتح البرنامج (ID غير موجود)",
+                        );
+                      }
+                    },
                     name: b.name ?? "",
-                    description: b.description ?? "",
                     type: b.type ?? "",
-                    targetAgeMin: b.targetAgeMin ?? 0,
-                    targetAgeMax: b.targetAgeMax ?? 0,
-                    targetGender: b.targetGender ?? "",
-                    location: b.location ?? "",
                     totalBudgetUsd: b.totalBudgetUsd ?? 0,
                     spentBudgetUsd: b.spentBudgetUsd ?? 0,
                     status: b.status ?? "",
-                    startDate: b.startDate ?? "",
-                    endDate: b.endDate ?? "",
                   );
                 },
               ),

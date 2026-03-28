@@ -9,6 +9,7 @@ import 'package:green_org/core/widgets/custom_header.dart';
 import 'package:green_org/features/dashboard/widgets/dashboard_card.dart';
 import '../beneficiaries/monitoring_beneficiaries/all_beneficiaries/controller/controller.dart';
 import '../programs/all_programs/controller/controller.dart';
+import '../projects/all_projects/controller/controller.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -57,6 +58,10 @@ class DashboardPage extends StatelessWidget {
     final programsController = Get.put(
       AllProgramsController(),
       tag: AllProgramsController.tag,
+    );
+        final projectsController = Get.put(
+      AllProjectsController(),
+      tag: AllProjectsController.tag,
     );
     return Scaffold(
       backgroundColor: StyleRepo.white,
@@ -151,7 +156,7 @@ class DashboardPage extends StatelessWidget {
                 future: beneficiariesController.getLastThreeBeneficiaries(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator(color: StyleRepo.glowGreen,));
                   }
 
                   if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -183,7 +188,7 @@ class DashboardPage extends StatelessWidget {
                 future: programsController.getLastThreePrograms(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator(color: StyleRepo.glowGreen,));
                   }
 
                   if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -199,9 +204,61 @@ class DashboardPage extends StatelessWidget {
                         leading: getStatusText(p.status ?? ""),
                         leadingColor: getStatusColor(p.status ?? ""),
                         title: p.name ?? "",
-                        subtitle: p.location ?? "", 
-                        onTap: () =>
-                            Get.toNamed(Pages.monitoringBeneficiary.route),
+                        subtitle: "الموقع : ${p.location ?? ''}",
+                        onTap: () {
+                          if (p.id != null) {
+                            Get.toNamed(
+                              Pages.monitoringProgram.route,
+                              arguments: p.id,
+                            );
+                          } else {
+                            Get.snackbar(
+                              "خطأ",
+                              "لا يمكن فتح البرنامج (ID غير موجود)",
+                            );
+                          }
+                        },
+                      );
+                    }).toList(),
+                  );
+                },
+              ),
+               const Gap(20),
+
+              FutureBuilder(
+                future: projectsController.getLastThreeProjects(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator(color: StyleRepo.glowGreen,));
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Text("لا يوجد مشاريع");
+                  }
+
+                  final programs = snapshot.data!;
+
+                  return CustomCard(
+                    title: "آخر المشاريع",
+                    items: programs.map((p) {
+                      return CustomCardItem(
+                        leading: getStatusText(p.status ?? ""),
+                        leadingColor: getStatusColor(p.status ?? ""),
+                        title: p.name ?? "",
+                        subtitle: "الموقع : ${p.location ?? ''}",
+                        onTap: () {
+                          if (p.id != null) {
+                            Get.toNamed(
+                              Pages.monitoringProject.route,
+                              arguments: p.id,
+                            );
+                          } else {
+                            Get.snackbar(
+                              "خطأ",
+                              "لا يمكن فتح المشروع (ID غير موجود)",
+                            );
+                          }
+                        },
                       );
                     }).toList(),
                   );

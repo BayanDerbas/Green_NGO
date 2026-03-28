@@ -64,19 +64,6 @@ class AddBeneficiarie extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              const FieldLabel("الاسم الكامل"),
-                              const Gap(6),
-                              CustomTextField(
-                                controller: controller.nameController,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Gap(20),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
                               const FieldLabel("الجنس"),
                               const Gap(6),
                               CustomDropdown<String>(

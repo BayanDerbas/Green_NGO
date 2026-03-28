@@ -21,7 +21,7 @@ class AllBeneficiariesPage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 40),
-            child: const CustomHeader(title: "جميع المستخدمين"),
+            child: const CustomHeader(title: "جميع المستفيدين"),
           ),
           Expanded(
             child: Padding(
