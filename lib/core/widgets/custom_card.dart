@@ -101,8 +101,8 @@ class _CustomCardRowState extends State<_CustomCardRow> {
                 widget.item.leading,
                 style: GoogleFonts.notoSansArabic(
                   color: widget.item.leadingColor ?? StyleRepo.glowGreen,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
                 ),
               ),
               const Spacer(),

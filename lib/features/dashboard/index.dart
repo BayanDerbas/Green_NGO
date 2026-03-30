@@ -7,12 +7,23 @@ import 'package:green_org/core/widgets/custom_card.dart';
 import 'package:green_org/core/widgets/custom_drawer.dart';
 import 'package:green_org/core/widgets/custom_header.dart';
 import 'package:green_org/features/dashboard/widgets/dashboard_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../beneficiaries/monitoring_beneficiaries/all_beneficiaries/controller/controller.dart';
 import '../programs/all_programs/controller/controller.dart';
 import '../projects/all_projects/controller/controller.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
+
+  Future<void> openPowerBi() async {
+  final url = Uri.parse(
+    "https://app.powerbi.com/reportEmbed?reportId=7935771d-0fb6-4bc9-b88d-68a744a5473a&autoAuth=true&ctid=1c2606a3-a680-45e3-b56f-c24684b15415",
+  );
+
+  if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+    throw Exception("Could not launch Power BI link");
+  }
+}
 
   String getStatusText(String status) {
     switch (status.toLowerCase()) {
@@ -80,69 +91,58 @@ class DashboardPage extends StatelessWidget {
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
                 childAspectRatio: 1,
-                children: const [
-                  DashboardCard(
+                children: [
+                  const DashboardCard(
                     title: "المستفيدين",
-                    total: "124",
+                    total: "+894",
                     numColor: StyleRepo.blue,
-                    active: "98",
-                    inactive: "26",
                     icon: Icons.people,
                     iconColor: StyleRepo.blue,
                     bgColor: StyleRepo.lightBlue,
                   ),
 
-                  DashboardCard(
+                  const DashboardCard(
                     title: "البرامج",
-                    total: "6",
+                    total: "+43",
                     numColor: StyleRepo.glownAmber,
-                    active: "4",
-                    inactive: "2",
                     icon: Icons.menu_book,
                     iconColor: StyleRepo.glownAmber,
                     bgColor: StyleRepo.lightGlownAmber,
                   ),
 
-                  DashboardCard(
+                  const DashboardCard(
                     title: "المشاريع",
-                    total: "3",
+                    total: "+300",
                     numColor: StyleRepo.purple,
-                    active: "2",
-                    inactive: "1",
                     icon: Icons.track_changes,
                     iconColor: StyleRepo.purple,
                     bgColor: StyleRepo.lightPurple,
                   ),
 
-                  DashboardCard(
+                  const DashboardCard(
                     title: "المتابعات",
-                    total: "80",
+                    total: "+500",
                     numColor: StyleRepo.magentaPink,
-                    active: "60",
-                    inactive: "20",
                     icon: Icons.assignment,
                     iconColor: StyleRepo.magentaPink,
                     bgColor: StyleRepo.lightPink,
                   ),
 
-                  DashboardCard(
+                  const DashboardCard(
                     title: "الأنشطة المنفذة",
-                    total: "35",
+                    total: "+135",
                     numColor: StyleRepo.deepOrange,
-                    active: "20",
-                    inactive: "15",
                     icon: Icons.show_chart,
                     iconColor: StyleRepo.deepOrange,
                     bgColor: StyleRepo.softOrange,
                   ),
 
                   DashboardCard(
+                    onTap: () => openPowerBi(),
                     title: "مؤشرات الأداء",
-                    total: "7",
+                    total: "انقر للتفاصيل",
+                    size: 18,
                     numColor: StyleRepo.teal,
-                    active: "5",
-                    inactive: "2",
-                    unActive: "غير محقق",
                     icon: Icons.trending_up,
                     iconColor: StyleRepo.teal,
                     bgColor: StyleRepo.lightCyan,
